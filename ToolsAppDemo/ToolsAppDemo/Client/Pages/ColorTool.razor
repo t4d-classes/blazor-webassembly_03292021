@@ -3,17 +3,8 @@
 @using ToolsAppDemo.Shared
 @using ToolsAppDemo.Client.ViewModels
 
-<header>
-  <h3>@headerText</h3>
-</header>
-<ul>
-  @foreach (var color in colors)
-  {
-    <li>
-      @color.Name @color.HexCode
-    </li>
-  }
-</ul>
+<ToolHeader HeaderText="Color Tool" />
+<ColorList Colors=@(colors.Where(c => c.Id > 1)) />
 <form>
   <div>
     <label>
@@ -33,7 +24,7 @@
 
 @code {
 
-  private string headerText = "Color Tool";
+  
 
   private List<Color> colors = new List<Color>()
   {

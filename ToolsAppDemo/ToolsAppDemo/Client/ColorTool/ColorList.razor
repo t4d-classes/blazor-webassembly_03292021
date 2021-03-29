@@ -1,0 +1,17 @@
+﻿@using ToolsAppDemo.Shared
+
+<ul>
+  @foreach (var color in Colors)
+  {
+    <li>
+      @color.Name @color.HexCode
+    </li>
+  }
+</ul>
+
+@code {
+
+  [Parameter]
+  public IEnumerable<Color> Colors { get; set; }
+
+}

@@ -1,6 +1,7 @@
 ﻿@page "/color-tool"
 
 @using ToolsAppDemo.Shared
+@using ToolsAppDemo.Client.ViewModels
 
 <header>
   <h3>@headerText</h3>
@@ -13,6 +14,22 @@
     </li>
   }
 </ul>
+<form>
+  <div>
+    <label>
+      Name
+      <input type="text" @bind="colorForm.Name" />
+    </label>
+  </div>
+  <div>
+    <label>
+      HexCode
+      <input type="text" @bind="colorForm.HexCode" />
+    </label>
+  </div>
+  <button type="button" @onclick="addColor">Add Color</button>
+</form>
+
 
 @code {
 
@@ -24,5 +41,22 @@
     new Color() { Id=2, Name="green", HexCode="00ff00" },
     new Color() { Id=3, Name="blue", HexCode="0000ff" },
   };
+
+  private ColorForm colorForm = new ColorForm();
+
+  private void addColor()
+  {
+    var color = new Color()
+    {
+      // Math.max(...colors.map(c => c.id), 0) + 1
+      Id=colors.Max(c => c.Id) + 1,
+      Name=colorForm.Name,
+      HexCode=colorForm.HexCode,
+    };
+
+    colors.Add(color);
+
+    colorForm = new ColorForm();
+  }
 
 }

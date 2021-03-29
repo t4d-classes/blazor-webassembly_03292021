@@ -1,0 +1,44 @@
+﻿@using ToolsAppDemo.Shared
+@using ColorFormView = ToolsAppDemo.Client.ViewModels.ColorForm
+
+<form>
+  <div>
+    <label>
+      Name
+      <input type="text" @bind="colorForm.Name" />
+    </label>
+  </div>
+  <div>
+    <label>
+      HexCode
+      <input type="text" @bind="colorForm.HexCode" />
+    </label>
+  </div>
+  <button type="button" @onclick="submitColor">@ButtonText</button>
+</form>
+
+@code {
+
+  [Parameter]
+  public string ButtonText { get; set; } = "Submit Color";
+
+  [Parameter]
+  public EventCallback<Color> OnSubmitColor { get; set; }
+
+  private ColorFormView colorForm = new ColorFormView();
+
+  private async Task submitColor()
+  {
+
+    var color = new Color()
+    {
+      Name = colorForm.Name,
+      HexCode = colorForm.HexCode,
+    };
+
+    await OnSubmitColor.InvokeAsync(color);
+
+    colorForm = new ColorFormView();
+  }
+
+}

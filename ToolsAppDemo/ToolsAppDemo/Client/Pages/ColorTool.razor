@@ -1,30 +1,13 @@
 ﻿@page "/color-tool"
 
 @using ToolsAppDemo.Shared
-@using ToolsAppDemo.Client.ViewModels
+
 
 <ToolHeader HeaderText="Color Tool" />
 <ColorList Colors=@(colors.Where(c => c.Id > 1)) />
-<form>
-  <div>
-    <label>
-      Name
-      <input type="text" @bind="colorForm.Name" />
-    </label>
-  </div>
-  <div>
-    <label>
-      HexCode
-      <input type="text" @bind="colorForm.HexCode" />
-    </label>
-  </div>
-  <button type="button" @onclick="addColor">Add Color</button>
-</form>
-
+<ColorForm ButtonText="Add Color" OnSubmitColor="addColor" />
 
 @code {
-
-  
 
   private List<Color> colors = new List<Color>()
   {
@@ -33,21 +16,10 @@
     new Color() { Id=3, Name="blue", HexCode="0000ff" },
   };
 
-  private ColorForm colorForm = new ColorForm();
-
-  private void addColor()
+  private void addColor(Color color)
   {
-    var color = new Color()
-    {
-      // Math.max(...colors.map(c => c.id), 0) + 1
-      Id=colors.Max(c => c.Id) + 1,
-      Name=colorForm.Name,
-      HexCode=colorForm.HexCode,
-    };
-
+    color.Id = colors.Max(c => c.Id) + 1;
     colors.Add(color);
-
-    colorForm = new ColorForm();
   }
 
 }

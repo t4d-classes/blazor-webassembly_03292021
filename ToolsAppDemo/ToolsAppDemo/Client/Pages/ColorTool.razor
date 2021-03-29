@@ -1,0 +1,28 @@
+﻿@page "/color-tool"
+
+@using ToolsAppDemo.Shared
+
+<header>
+  <h3>@headerText</h3>
+</header>
+<ul>
+  @foreach (var color in colors)
+  {
+    <li>
+      @color.Name @color.HexCode
+    </li>
+  }
+</ul>
+
+@code {
+
+  private string headerText = "Color Tool";
+
+  private List<Color> colors = new List<Color>()
+  {
+    new Color() { Id=1, Name="red", HexCode="ff0000" },
+    new Color() { Id=2, Name="green", HexCode="00ff00" },
+    new Color() { Id=3, Name="blue", HexCode="0000ff" },
+  };
+
+}

@@ -1,6 +1,9 @@
 @page "/car-tool"
 
 @using ToolsAppDemo.Shared
+@using ToolsAppDemo.Client.Interfaces
+
+@inject ICarsDataService carsDataSvc
 
 <ToolHeader HeaderText="Car Tool" />
 <CarTable Cars=@cars EditCarId=@editCarId
@@ -10,32 +13,37 @@
 <ToolFooter CompanyName="A Cool Company, Inc." />
 
 @code {
-  private List<Car> cars = new List<Car>() {
-    new Car() {
-      Id=1, Make="Ford",
-      Model="Fusion Hybrid", Year=2020,
-      Color="red", Price=45000
-    },
-    new Car() {
-      Id=2, Make="Tesla",
-      Model="S", Year=2019,
-      Color="blue", Price=120000
-    },
-  };
+  private IEnumerable<Car> cars = new List<Car>();
 
   private long editCarId { get; set; } = -1;
 
-  private void addCar(Car car) {
-    car.Id = cars.Max(c => c.Id) + 1;
-    cars.Add(car);
-    editCarId = -1;
+  protected override async Task OnInitializedAsync()
+  {
+    await refreshCars();
   }
 
-  private void deleteCar(long carId)
-  {
-    var car = cars.Find(c => c.Id == carId);
-    cars.Remove(car);
+  private async Task refreshCars() {
+     cars = await carsDataSvc.All();
+  }
+
+  private async Task addCar(Car car) {
+    await carsDataSvc.AddCar(car);
     editCarId = -1;
+    await refreshCars();
+  }
+
+  private async Task saveCar(Car car)
+  {
+    await carsDataSvc.SaveCar(car);
+    editCarId = -1;
+    await refreshCars();
+  }
+
+  private async Task deleteCar(long carId)
+  {
+    await carsDataSvc.DeleteCar(carId);
+    editCarId = -1;
+    await refreshCars();
   }
 
   private void editCar(long carId)
@@ -47,12 +55,4 @@
   {
     editCarId = -1;
   }
-
-  private void saveCar(Car car)
-  {
-    var carIndex = cars.FindIndex(c => c.Id == car.Id);
-    cars[carIndex] = car;
-    editCarId = -1;
-  }
-
 }

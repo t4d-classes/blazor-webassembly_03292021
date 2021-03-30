@@ -23,8 +23,12 @@ namespace ToolsAppDemo.Client
       builder.Services.AddScoped(sp => new HttpClient {
         BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
       });
+
       //builder.Services.AddScoped<IColorsDataService, ColorsInMemoryDataService>();
       builder.Services.AddScoped<IColorsDataService, ColorsApiDataService>();
+
+      //builder.Services.AddScoped<ICarsDataService, CarsInMemoryDataService>();
+      builder.Services.AddScoped<ICarsDataService, CarsApiDataService>();
 
       await builder.Build().RunAsync();
     }

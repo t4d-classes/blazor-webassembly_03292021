@@ -17,7 +17,7 @@
     {
       @if (EditCarId == car.Id)
       {
-        <CarEditRow Car=@car />
+        <CarEditRow Car=@car OnSaveCar=@OnSaveCar OnCancelCar=@OnCancelCar />
       }
       else
       {
@@ -40,9 +40,9 @@
   [Parameter]
   public EventCallback<long> OnEditCar { get; set; }
 
+  [Parameter]
+  public EventCallback<Car> OnSaveCar { get; set; }
 
-  //private async Task deleteCar(long carId)
-  //{
-  //  await OnDeleteCar.InvokeAsync(carId);
-  //}
+  [Parameter]
+  public EventCallback OnCancelCar { get; set; }
 }

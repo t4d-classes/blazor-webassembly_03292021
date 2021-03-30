@@ -12,18 +12,24 @@
 <ColorForm ButtonText="Add Color" OnSubmitColor="addColor" />
 
 @code {
-  private IEnumerable<Color> colors;
+  private IEnumerable<Color> colors = new List<Color>();
 
-  protected override void OnInitialized()
+  protected override async Task OnInitializedAsync()
   {
-    base.OnInitialized();
-
-    colors = colorsDataSvc.Colors;
+    await refreshColors();
   }
 
-  private void addColor(Color color)
+  private async Task refreshColors()
   {
-    colorsDataSvc.AddColor(color);
+    colors = await colorsDataSvc.All();
   }
+
+  private async Task addColor(Color color)
+  {
+    await colorsDataSvc.AddColor(color);
+    await refreshColors();
+  }
+
+  
 
 }

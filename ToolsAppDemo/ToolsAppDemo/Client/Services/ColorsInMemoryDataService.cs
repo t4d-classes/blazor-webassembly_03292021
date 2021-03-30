@@ -16,11 +16,9 @@ namespace ToolsAppDemo.Client.Services
       new Color() { Id=3, Name="blue", HexCode="0000ff" },
     };
 
-    public IEnumerable<Color> Colors
+    public async Task<IEnumerable<Color>> All()
     {
-      get {
-        return colors;
-      }
+      return colors;
     }
 
     public async Task AddColor(Color color)

@@ -8,7 +8,7 @@ namespace ToolsAppDemo.Client.Interfaces
 {
   public interface IColorsDataService
   {
-    IEnumerable<Color> Colors { get; }
+    Task<IEnumerable<Color>> All();
     Task AddColor(Color color);
   }
 }

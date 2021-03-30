@@ -7,9 +7,18 @@
   <td>@Car.Year</td>
   <td>@Car.Color</td>
   <td>@Car.Price</td>
+  <td><button type="button" @onclick="deleteCar">Delete</button></td>
 </tr>
 
 @code {
   [Parameter]
   public Car Car { get; set; }
+
+  [Parameter]
+  public EventCallback<long> OnDeleteCar { get; set; }
+
+  private async Task deleteCar()
+  {
+    await OnDeleteCar.InvokeAsync(Car.Id);
+  }
 }

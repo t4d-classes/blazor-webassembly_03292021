@@ -4,7 +4,19 @@
   @foreach (var color in Colors)
   {
     <li>
-      @color.Name @color.HexCode
+      @color.Name <button type="button" @onclick=@(() => setShowDetailsColorId(color.Id))>View Details</button>
+
+      @if (showDetailsColorId == color.Id) {  
+        <div>
+          <h4>Color Details</h4>
+          <ul>
+            <li>Id: @color.Id</li>
+            <li>Name: @color.Name</li>
+            <li>HexCode: @color.HexCode</li>
+          </ul>
+        </div>
+      }
+
     </li>
   }
 </ul>
@@ -13,5 +25,12 @@
 
   [Parameter]
   public IEnumerable<Color> Colors { get; set; }
+
+  private long showDetailsColorId = 0;
+
+  private void setShowDetailsColorId(long colorId)
+  {
+    showDetailsColorId = colorId;
+  }
 
 }

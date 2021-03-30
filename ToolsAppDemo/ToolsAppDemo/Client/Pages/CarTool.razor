@@ -3,7 +3,7 @@
 @using ToolsAppDemo.Shared
 
 <ToolHeader HeaderText="Car Tool" />
-<CarTable Cars=@cars OnDeleteCar="deleteCar" />
+<CarTable Cars=@cars OnDeleteCar=@deleteCar />
 <CarForm ButtonText="Add Car" OnSubmitCar="addCar" />
 <ToolFooter CompanyName="A Cool Company, Inc." />
 

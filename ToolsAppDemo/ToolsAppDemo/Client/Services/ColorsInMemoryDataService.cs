@@ -16,15 +16,17 @@ namespace ToolsAppDemo.Client.Services
       new Color() { Id=3, Name="blue", HexCode="0000ff" },
     };
 
-    public async Task<IEnumerable<Color>> All()
+    public Task<IEnumerable<Color>> All()
     {
-      return colors;
+      return Task.FromResult(colors.AsEnumerable());
     }
 
-    public async Task AddColor(Color color)
+    public Task<Color> AddColor(Color color)
     {
       color.Id = colors.Max(c => c.Id) + 1;
       colors.Add(color);
+
+      return Task.FromResult(color);
     }
   }
 }

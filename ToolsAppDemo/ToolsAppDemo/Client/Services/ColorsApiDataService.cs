@@ -26,9 +26,11 @@ namespace ToolsAppDemo.Client.Services
       return await _httpClient.GetFromJsonAsync<Color[]>("/api/colors");
     }
 
-    public async Task AddColor(Color color)
+    public async Task<Color> AddColor(Color color)
     {
-      await _httpClient.PostAsJsonAsync<Color>("/api/colors", color);
+      var httpResponseMessage = await _httpClient.PostAsJsonAsync("/api/colors", color);
+
+      return await httpResponseMessage.Content.ReadFromJsonAsync<Color>();
     }
   }
 }

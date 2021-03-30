@@ -15,7 +15,14 @@
   <tbody>
     @foreach (var car in Cars)
     {
-      <CarViewRow Car=@car OnDeleteCar=@OnDeleteCar />
+      @if (EditCarId == car.Id)
+      {
+        <CarEditRow Car=@car />
+      }
+      else
+      {
+        <CarViewRow Car=@car OnEditCar=@OnEditCar OnDeleteCar=@OnDeleteCar />
+      }
     }
   </tbody>
 </table>
@@ -25,7 +32,14 @@
   public IEnumerable<Car> Cars { get; set; }
 
   [Parameter]
+  public long EditCarId { get; set; }
+
+  [Parameter]
   public EventCallback<long> OnDeleteCar { get; set; }
+
+  [Parameter]
+  public EventCallback<long> OnEditCar { get; set; }
+
 
   //private async Task deleteCar(long carId)
   //{

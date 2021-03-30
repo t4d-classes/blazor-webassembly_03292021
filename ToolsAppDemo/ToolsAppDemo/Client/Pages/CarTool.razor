@@ -3,7 +3,8 @@
 @using ToolsAppDemo.Shared
 
 <ToolHeader HeaderText="Car Tool" />
-<CarTable Cars=@cars OnDeleteCar=@deleteCar />
+<CarTable Cars=@cars EditCarId=@editCarId
+          OnEditCar=@editCar OnDeleteCar=@deleteCar />
 <CarForm ButtonText="Add Car" OnSubmitCar="addCar" />
 <ToolFooter CompanyName="A Cool Company, Inc." />
 
@@ -21,6 +22,8 @@
     },
   };
 
+  private long editCarId { get; set; } = -1;
+
   private void addCar(Car car) {
     car.Id = cars.Max(c => c.Id) + 1;
     cars.Add(car);
@@ -30,6 +33,11 @@
   {
     var car = cars.Find(c => c.Id == carId);
     cars.Remove(car);
+  }
+
+  private void editCar(long carId)
+  { 
+    editCarId = carId
   }
 
 }

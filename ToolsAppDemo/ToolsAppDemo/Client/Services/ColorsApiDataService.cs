@@ -26,6 +26,12 @@ namespace ToolsAppDemo.Client.Services
       return await _httpClient.GetFromJsonAsync<Color[]>("/api/colors");
     }
 
+    public async Task<Color> One(long colorId)
+    {
+      return await _httpClient.GetFromJsonAsync<Color>(
+        $"/api/colors/{Uri.EscapeUriString(colorId.ToString())}");
+    }
+
     public async Task<Color> AddColor(Color color)
     {
       var httpResponseMessage = await _httpClient.PostAsJsonAsync("/api/colors", color);

@@ -14,8 +14,6 @@ namespace ToolsAppDemo.Client.Services
   {
     private HttpClient _httpClient;
 
-    public IEnumerable<Car> Cars => throw new NotImplementedException();
-
     public CarsApiDataService(HttpClient httpClient)
     {
       _httpClient = httpClient;

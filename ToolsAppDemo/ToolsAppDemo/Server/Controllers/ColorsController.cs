@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 
 using ToolsAppDemo.Shared;
 
@@ -24,6 +25,23 @@ namespace ToolsAppDemo.Server.Controllers
     public IActionResult All()
     {
       return Ok(colors);
+    }
+
+    [HttpGet("{colorId:long}")]
+    public IActionResult One(long colorId)
+    {
+      var color = colors.Find(c => c.Id == colorId);
+
+      Thread.Sleep(2000);
+
+      if (color == null)
+      {
+        return NotFound();
+      }
+      else
+      {
+        return Ok(color);
+      }
     }
 
     [HttpPost]

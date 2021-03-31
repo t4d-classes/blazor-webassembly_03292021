@@ -21,6 +21,11 @@ namespace ToolsAppDemo.Client.Services
       return Task.FromResult(colors.AsEnumerable());
     }
 
+    public Task<Color> One(long colorId)
+    {
+      return Task.FromResult(colors.Find(c => c.Id == colorId));
+    }
+
     public Task<Color> AddColor(Color color)
     {
       color.Id = colors.Max(c => c.Id) + 1;

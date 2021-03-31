@@ -28,6 +28,11 @@ namespace ToolsAppDemo.Client.Services
       return Task.FromResult(cars.AsEnumerable());
     }
 
+    public Task<Car> One(long carId)
+    {
+      return Task.FromResult(cars.Find(c => c.Id == carId));
+    }
+
     public Task<Car> AddCar(Car car) {
       car.Id = cars.Max(c => c.Id) + 1;
       cars.Add(car);

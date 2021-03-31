@@ -1,21 +1,29 @@
 ﻿@using ToolsAppDemo.Shared
 @using ColorFormView = ToolsAppDemo.Client.ViewModels.ColorForm
 
-<form>
+<EditForm Model="colorForm" OnValidSubmit="submitColor">
+
+  <DataAnnotationsValidator />
+  <ValidationSummary />
+
   <div>
     <label>
       Name
-      <input type="text" @bind="colorForm.Name" />
+      <InputText @bind-Value="colorForm.Name" />
+      <ValidationMessage For=@(() => colorForm.Name) style="display:inline;" />
     </label>
   </div>
+
   <div>
     <label>
       HexCode
-      <input type="text" @bind="colorForm.HexCode" />
+      <InputText @bind-Value="colorForm.HexCode" />
+      <ValidationMessage For=@(() => colorForm.HexCode) style="display:inline;" />
     </label>
   </div>
-  <button type="button" @onclick="submitColor">@ButtonText</button>
-</form>
+
+  <button type="submit">@ButtonText</button>
+</EditForm>
 
 @code {
 

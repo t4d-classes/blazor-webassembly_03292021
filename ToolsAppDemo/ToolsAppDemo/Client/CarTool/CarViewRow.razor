@@ -2,7 +2,7 @@
 
 <tr>
   <td>@Car.Id</td>
-  <td>@Car.Make</td>
+  <td><a href="/car-tool/@Uri.EscapeUriString(Car.Id.ToString())">@Car.Make</a></td>
   <td>@Car.Model</td>
   <td>@Car.Year</td>
   <td>@Car.Color</td>

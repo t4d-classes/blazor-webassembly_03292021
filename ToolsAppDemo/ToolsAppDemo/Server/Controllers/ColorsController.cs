@@ -24,6 +24,7 @@ namespace ToolsAppDemo.Server.Controllers
     [HttpGet]
     public IActionResult All()
     {
+      Thread.Sleep(2000);
       return Ok(colors);
     }
 

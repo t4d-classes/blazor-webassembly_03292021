@@ -1,7 +1,33 @@
 ﻿@page "/"
 
+@inject IJSRuntime JS
+
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+
+<button type="button" @onclick="doIt">Do It</button>
+
+<button type="button" @onclick="upperCase">Upper Case</button>
+
+<div>Text Value: @textValue</div>
+
+
+@code {
+
+  private string textValue = "psea";
+
+
+  private async Task doIt()
+  {
+    await JS.InvokeVoidAsync("toolsAppDemo.doIt");
+  }
+
+  private async Task upperCase()
+  {
+    textValue = await JS.InvokeAsync<string>("toolsAppDemo.ucase", textValue);
+  }
+}

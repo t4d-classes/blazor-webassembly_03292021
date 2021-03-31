@@ -1,8 +1,10 @@
 ﻿@page "/color-tool"
 
-@using ToolsAppDemo.Client.Interfaces 
+@using ToolsAppDemo.Client.Interfaces
+@using ToolsAppDemo.Client.Services
 
 @inject IColorsDataService colorsDataSvc
+@inject ScreenBlockerService screenBlockerSvc
 
 @using ToolsAppDemo.Shared
 
@@ -21,7 +23,9 @@
 
   private async Task refreshColors()
   {
+    await screenBlockerSvc.BlockScreen();
     colors = await colorsDataSvc.All();
+    await screenBlockerSvc.UnblockScreen();
   }
 
   private async Task addColor(Color color)
@@ -30,6 +34,6 @@
     await refreshColors();
   }
 
-  
+
 
 }

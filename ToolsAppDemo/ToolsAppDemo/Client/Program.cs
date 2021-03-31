@@ -30,6 +30,8 @@ namespace ToolsAppDemo.Client
       //builder.Services.AddScoped<ICarsDataService, CarsInMemoryDataService>();
       builder.Services.AddScoped<ICarsDataService, CarsApiDataService>();
 
+      builder.Services.AddScoped<ScreenBlockerService>();
+
       await builder.Build().RunAsync();
     }
   }

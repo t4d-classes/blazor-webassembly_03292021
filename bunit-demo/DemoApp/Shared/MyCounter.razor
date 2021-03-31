@@ -1,0 +1,15 @@
+<button type="button" @onclick=@increment>Click Me</button>
+
+@code {
+
+    private long counter = 0;
+
+    [Parameter]
+    public EventCallback<long> OnIncrement { get; set; }
+
+
+    private async Task increment() {
+        await OnIncrement.InvokeAsync(++counter);
+    }
+
+}

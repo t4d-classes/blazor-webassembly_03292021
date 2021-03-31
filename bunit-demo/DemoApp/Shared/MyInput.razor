@@ -1,0 +1,11 @@
+<input type="text" @bind="someValue" />
+<button type="button" @onclick=@(() => OnSubmit.InvokeAsync(someValue))>
+    Submit</button>
+
+@code {
+
+    private string someValue = "";
+
+    [Parameter]
+    public EventCallback<string> OnSubmit { get; set; }
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -21,6 +22,7 @@ namespace ToolsAppDemo.Client.Services
       _httpClient = httpClient;
     }
 
+    [JSInvokable]
     public async Task<IEnumerable<Color>> All()
     {
       return await _httpClient.GetFromJsonAsync<Color[]>("/api/colors");
